@@ -14,7 +14,7 @@ class Transactions {
       join(await getDatabasesPath(), 'transactions.db'),
       onCreate: (db, version) {
         return db.execute(
-          'CREATE TABLE IF NOT EXISTS Transactions(id INTEGER PRIMARY KEY AUTO INCREMENT, title TEXT,description TEXT, amount REAL, timeStamp INTEGER)',
+          'CREATE TABLE IF NOT EXISTS Transactions(title TEXT,description TEXT, amount REAL, timeStamp INTEGER)',
         );
       },
       version: 1,

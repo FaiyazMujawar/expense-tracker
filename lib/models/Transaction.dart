@@ -1,5 +1,4 @@
 class TransactionData {
-  int id;
   final String title;
   final String description;
   final double amount;

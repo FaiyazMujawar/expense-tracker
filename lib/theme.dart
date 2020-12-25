@@ -71,12 +71,12 @@ var kRoundedButton = RoundedRectangleBorder(
   borderRadius: BorderRadius.circular(50),
 );
 
-Function kInputDecorationStyle = (String title) => InputDecoration(
-      hintText: title,
+Function kInputDecorationStyle = (String hintText) => InputDecoration(
+      hintText: hintText,
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(2),
         borderSide: BorderSide(
-          color: Colors.grey.shade300,
+          color: Colors.grey.shade100,
           width: 1.25,
         ),
       ),

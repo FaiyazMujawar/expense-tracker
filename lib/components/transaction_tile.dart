@@ -1,69 +1,50 @@
+import 'package:expense_tracker/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'circular_background_icon.dart';
+import '../models/Transaction.dart';
 
 class TransactionTile extends StatelessWidget {
-  final String title;
-  final String date;
-  final double amount;
+  final TransactionData data;
+  final TextOverflow overflow;
 
-  const TransactionTile({Key key, this.title, this.date, this.amount})
-      : super(key: key);
+  const TransactionTile({
+    Key key,
+    @required this.data,
+    this.overflow,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              CircularBackGroundIcon(
-                size: 5,
-                icon: amount > 0 ? Icons.call_received : Icons.call_made,
-                color: amount > 0 ? Colors.green : Colors.red,
-              ),
-              SizedBox(
-                width: 20,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  FittedBox(
-                    child: Text(
-                      title,
-                      style: GoogleFonts.lato(
-                        color: Colors.black,
-                        fontSize: 15,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 5.0,
-                  ),
-                  Text(
-                    date,
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              Expanded(child: Container()),
-              FittedBox(
-                child: Text(
-                  "₹${amount.abs()}",
-                  style: GoogleFonts.roboto(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-              )
-            ],
+    return Container(
+      child: ListTile(
+        dense: true,
+        leading: CircularBackGroundIcon(
+          size: 5,
+          icon: data.amount > 0 ? Icons.call_received : Icons.call_made,
+          color: data.amount > 0 ? Colors.green : Colors.red,
+        ),
+        title: Text(
+          data.title,
+          overflow: overflow ?? TextOverflow.clip,
+          style: GoogleFonts.lato(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
           ),
-        ],
+        ),
+        subtitle: Text(
+          getDate(data.timeStamp, true),
+        ),
+        trailing: FittedBox(
+          child: Text(
+            "${data.amount >= 0 ? '+ ' : '- '} ₹${data.amount.abs()}",
+            style: GoogleFonts.roboto(
+              fontWeight: FontWeight.bold,
+              color: data.amount >= 0 ? Colors.green : Colors.red.shade500,
+            ),
+          ),
+        ),
       ),
     );
   }

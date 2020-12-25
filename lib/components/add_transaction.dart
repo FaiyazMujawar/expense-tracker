@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../theme.dart';
 import '../models/Transaction.dart';
 import '../data/database.dart';
+import '../models/TransactionsContext.dart';
 
 class AddTransaction extends StatefulWidget {
   @override
@@ -26,7 +27,7 @@ class _AddTransactionState extends State<AddTransaction> {
       _amountController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Consumer(
+    return Consumer<TransactionsContext>(
       builder: (context, transactions, child) => Padding(
         padding: MediaQuery.of(context).viewInsets,
         child: Container(
