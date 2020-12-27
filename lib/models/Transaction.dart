@@ -1,6 +1,7 @@
 class TransactionData {
   final String title;
   final String description;
+  final String category;
   final double amount;
   final int timeStamp;
 
@@ -8,6 +9,7 @@ class TransactionData {
     this.timeStamp,
     this.title,
     this.description,
+    this.category,
     this.amount,
   });
 
@@ -15,6 +17,7 @@ class TransactionData {
     return {
       'title': title,
       'description': description,
+      'category': category,
       'amount': amount,
       'timeStamp': timeStamp,
     };

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
+import '../theme.dart';
 
 class ColoredAmount extends StatelessWidget {
   final double amount;
@@ -11,10 +12,7 @@ class ColoredAmount extends StatelessWidget {
       child: FittedBox(
         child: Text(
           "${amount >= 0 ? '+ ' : '- '} ₹${amount.abs()}",
-          style: GoogleFonts.roboto(
-            fontWeight: FontWeight.bold,
-            color: amount >= 0 ? Colors.green : Colors.red.shade500,
-          ),
+          style: kColoredAmountTextStyle(amount),
         ),
       ),
     );

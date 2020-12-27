@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'circular_background_icon.dart';
+import '../theme.dart';
 
 class ColoredTitle extends StatelessWidget {
   final IconData icon;
@@ -35,10 +36,7 @@ class ColoredTitle extends StatelessWidget {
           ),
           Text(
             title,
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              color: Colors.grey.shade700,
-            ),
+            style: kAmountTitleTextStyle,
           ),
           SizedBox(
             width: 10,

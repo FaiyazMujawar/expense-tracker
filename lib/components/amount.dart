@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-import './colored_title.dart';
+import 'colored_title.dart';
+import '../theme.dart';
 
 class Amount extends StatelessWidget {
   final String title;
@@ -41,9 +41,7 @@ class Amount extends StatelessWidget {
           FittedBox(
             child: Text(
               amount >= 0 ? '₹$amount' : '- ₹${amount.abs()}',
-              style: GoogleFonts.sourceSansPro(
-                fontSize: 26,
-                fontWeight: FontWeight.w700,
+              style: kAmountTextStyle.copyWith(
                 color: amount >= 0 ? Colors.black : Colors.red.shade600,
               ),
             ),

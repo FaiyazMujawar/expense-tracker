@@ -14,7 +14,7 @@ class Transactions {
       join(await getDatabasesPath(), 'transactions.db'),
       onCreate: (db, version) {
         return db.execute(
-          'CREATE TABLE IF NOT EXISTS Transactions(title TEXT,description TEXT, amount REAL, timeStamp INTEGER)',
+          'CREATE TABLE IF NOT EXISTS Transactions(title TEXT,description TEXT, category TEXT,amount REAL, timeStamp INTEGER)',
         );
       },
       version: 1,
@@ -50,6 +50,7 @@ class Transactions {
       (index) => TransactionData(
         title: result[index]['title'],
         description: result[index]['description'],
+        category: result[index]['category'],
         amount: result[index]['amount'],
         timeStamp: result[index]['timeStamp'],
       ),
@@ -75,6 +76,7 @@ class Transactions {
       (index) => TransactionData(
         title: result[index]['title'],
         description: result[index]['description'],
+        category: result[index]['category'],
         amount: result[index]['amount'],
         timeStamp: result[index]['timeStamp'],
       ),

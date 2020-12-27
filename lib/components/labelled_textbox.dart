@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// import '../theme.dart';
+import '../theme.dart';
 
 class LabelledTextBox extends StatelessWidget {
   final String label;
@@ -8,6 +8,7 @@ class LabelledTextBox extends StatelessWidget {
   final Function action;
   final int maxLines;
   final TextInputType keyboardType;
+  final Function validator;
 
   const LabelledTextBox({
     Key key,
@@ -16,6 +17,7 @@ class LabelledTextBox extends StatelessWidget {
     this.action,
     this.maxLines = 1,
     this.keyboardType = TextInputType.text,
+    this.validator,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -28,10 +30,7 @@ class LabelledTextBox extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Text(
               label,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15,
-              ),
+              style: kInputLabelTextStyle,
             ),
           ),
           SizedBox(
@@ -40,20 +39,8 @@ class LabelledTextBox extends StatelessWidget {
           TextFormField(
             keyboardType: keyboardType,
             maxLines: maxLines,
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.symmetric(
-                horizontal: 15,
-                vertical: 10,
-              ),
-              hintText: hintText,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-                borderSide: BorderSide(
-                  color: Colors.grey.shade100,
-                  width: 1.25,
-                ),
-              ),
-            ),
+            validator: validator,
+            decoration: kInputDecorationStyle,
             onChanged: action,
           ),
         ],

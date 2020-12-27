@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../components/transaction_tile.dart';
-import '../components/transaction_details.dart';
 import '../constants.dart';
 import '../data/database.dart';
 import '../models/Transaction.dart';
+import '../theme.dart';
 
 class AllTransactionsPage extends StatefulWidget {
   @override
@@ -48,37 +47,46 @@ class _AllTransactionsPageState extends State<AllTransactionsPage> {
     // Get all transactions
     final List<TransactionData> transactions = await db.getAllTransactions();
 
+    if (transactions.length == 0) {
+      setState(
+        () {
+          _transactions = [
+            Container(
+              height: MediaQuery.of(context).size.height * 0.75,
+              padding: const EdgeInsets.all(25),
+              child: Center(
+                child: Text(
+                  'No transactions',
+                  style: kInfoTextStyle,
+                ),
+              ),
+            ),
+          ];
+        },
+      );
+      return;
+    }
+
     // Set current month
-    String month = getMonth(transactions.elementAt(0).timeStamp);
-    _transactions = [
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-        child: Text(
-          month.toUpperCase(),
-          style: GoogleFonts.robotoCondensed(
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1.25,
-          ),
-        ),
-      ),
-    ];
+    String month = '';
+    _transactions = [];
 
     // Add widgets to List
     for (var transaction in transactions) {
       if (getMonth(transaction.timeStamp) != month) {
         month = getMonth(transaction.timeStamp);
-        _transactions.add(Text(month));
-      }
-      _transactions.add(
-        GestureDetector(
-          child: TransactionTile(data: transaction),
-          onTap: () => showModalBottomSheet(
-            context: context,
-            builder: (context) => TransactionDetails(
-              data: transaction,
+        _transactions.add(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+            child: Text(
+              month.toUpperCase(),
+              style: kTitleTextStyle,
             ),
           ),
-        ),
+        );
+      }
+      _transactions.add(
+        TransactionTile(data: transaction),
       );
     }
     setState(() {});

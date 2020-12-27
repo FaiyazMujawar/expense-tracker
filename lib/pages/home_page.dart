@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import 'add_transaction_page.dart';
+import 'all_transactions.dart';
 import '../components/amount.dart';
 import '../components/transaction_tile.dart';
 import '../models/TransactionsContext.dart';
-import 'add_transaction_page.dart';
-import 'all_transactions.dart';
-// import '../components/add_transaction.dart';
+import '../theme.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,9 +15,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  double _height;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    _height = size.height * 0.22;
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -29,21 +30,21 @@ class _HomePageState extends State<HomePage> {
                 physics: BouncingScrollPhysics(),
                 children: [
                   SizedBox(
-                    height: size.width * 0.4,
+                    height: _height,
                     width: size.width,
                     child: Amount(
                       title: 'Total Balance',
                       amount:
                           transactions.totalIncome - transactions.totalExpense,
                       color: Colors.purple.shade500,
-                      icon: MaterialIcons.account_balance_wallet,
+                      icon: Icons.account_balance_wallet,
                     ),
                   ),
                   SizedBox(
                     height: 10,
                   ),
                   SizedBox(
-                    height: size.width * 0.4,
+                    height: _height,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -77,11 +78,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Text(
                         "TODAY'S TRANSACTIONS",
-                        style: GoogleFonts.robotoCondensed(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1.5,
-                        ),
+                        style: kTitleTextStyle,
                       ),
                       FlatButton(
                         onPressed: () {
@@ -94,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                         },
                         child: Text(
                           'View All',
-                          style: TextStyle(
+                          style: kTitleTextStyle.copyWith(
                             color: Colors.purple,
                           ),
                         ),
@@ -106,13 +103,12 @@ class _HomePageState extends State<HomePage> {
                   ),
                   if (transactions.latestTransactions.length == 0)
                     Container(
+                      height: size.height * 0.2,
                       padding: const EdgeInsets.all(15),
                       child: Center(
                         child: Text(
-                          'No transactions',
-                          style: TextStyle(
-                            color: Colors.grey.shade400,
-                          ),
+                          'No transactions today',
+                          style: kInfoTextStyle,
                         ),
                       ),
                     )
@@ -139,13 +135,21 @@ class _HomePageState extends State<HomePage> {
           child: Icon(
             Icons.add,
           ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => AddTransactionPage(),
-              ),
-            );
+          onPressed: () async {
+            bool value = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddTransactionPage(),
+                  ),
+                ) ??
+                false;
+            if (value)
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Transaction added!'),
+                  duration: Duration(seconds: 2),
+                ),
+              );
           },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
