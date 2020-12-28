@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'models/TransactionsContext.dart';
-import 'pages/home_page.dart';
-// import 'pages/add_transaction_page.dart';
+import 'pages/main_page.dart';
 
 void main() {
   runApp(
@@ -22,7 +21,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Expense Tracker',
       // home: AddTransactionPage(),
-      home: HomePage(),
+      // home: OverviewPage(),
+      home: MainPage(),
     );
   }
 }

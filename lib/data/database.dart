@@ -7,6 +7,7 @@ import '../models/Transaction.dart';
 
 class Transactions {
   Database _db;
+  // int _touchIndex = 0;
 
   // Get the database connection
   Future<Database> getDatabaseConnection() async {

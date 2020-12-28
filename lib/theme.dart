@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 // Page: Amount.dart
 
-var kAmountBoxDecoration = BoxDecoration(
+var kBoxDecoration = BoxDecoration(
   borderRadius: BorderRadius.circular(10),
   border: Border.all(
     width: 1.25,
@@ -25,8 +25,9 @@ var kColoredAmountTextStyle = (double amount) => GoogleFonts.lato(
 
 // Page: colored_title.dart
 
-var kAmountTitleTextStyle = GoogleFonts.lato(
-  fontWeight: FontWeight.w500,
+var kAmountTitleTextStyle = GoogleFonts.ptSans(
+  fontWeight: FontWeight.bold,
+  fontSize: 13,
   color: Colors.grey.shade700,
 );
 
@@ -71,5 +72,14 @@ var kTitleTextStyle = GoogleFonts.robotoCondensed(
 );
 
 var kInfoTextStyle = TextStyle(
-  color: Colors.grey.shade400,
+  color: Colors.grey.shade500,
+);
+
+// Page: OverviewPage.dart
+var kTitleBoxDecoration = BoxDecoration(
+  color: Colors.blue.shade400.withOpacity(0.25),
+  borderRadius: BorderRadius.circular(50),
+  border: Border.fromBorderSide(
+    BorderSide(width: 0.8, color: Colors.blue.shade400),
+  ),
 );

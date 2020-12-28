@@ -19,11 +19,17 @@ class TransactionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<dynamic> _category = getCategory(data.category);
-    print(data.toMap());
     return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+      margin: const EdgeInsets.all(5),
+      decoration: kBoxDecoration,
       child: GestureDetector(
         onTap: () => showModalBottomSheet(
           context: context,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+            top: Radius.circular(8.0),
+          )),
           builder: (context) => TransactionDetails(
             data: data,
           ),

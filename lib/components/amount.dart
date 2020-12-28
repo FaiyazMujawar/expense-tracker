@@ -20,13 +20,7 @@ class Amount extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(13),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          width: 1.25,
-          color: Colors.grey.shade300,
-        ),
-      ),
+      decoration: kBoxDecoration,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
